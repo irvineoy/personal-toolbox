@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Part-time Job records</title>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <style type="text/css">
+        .suspension{
+        /*padding:10px;*/
+        /*width:100%;*/
+        /*height:300px;*/
+        display:block;
+        /*position: absolute;*/
+        /*top:50%;*/
+        /*left:50%;*/
+        /*margin-left:50%;*/
+        /*margin-top:-150px;*/
+        text-align: center;
+        }
+        .banner{
+        /*width:100%;*/
+        /*height:150px;*/
+        display:block;
+        /*position:absolute;*/
+        }
+        .header{
+        font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 1em;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+        background: #fff;
+        letter-spacing: 0.05em;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="banner header">
+            <h1>
+            Record my timestamp of part-time job
+            </h1>
+        </div>        
+        <div class="suspension">
+            <form class="pure-form pure-form-aligned" action="/index/" method="post">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label for="month">Month</label>
+                        <input id="month" type="text" name="month" placeholder="Enter the month">
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="day">Day</label>
+                        <input id="day" type="text" name="day" placeholder="Enter the day">
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="beginTime">beginTime</label>
+                        <input id="beginTime" type="text" name="beginTime" placeholder="Enter the beginTime">
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="endTime">endTime</label>
+                        <input id="endTime" type="text" name="endTime" placeholder="Enter the endTime">
+                    </div>
+                    <div class="pure-controls">
+                        <!-- <label for="cb" class="pure-checkbox">
+                            <input id="cb" type="checkbox"> I've read the terms and conditions
+                        </label> -->
+                        <button type="submit" name="submit" class="pure-button pure-button-primary">Submit</button>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- <p>Thirds</p> -->
+            <h2>The sum of time is: {{ sumTime }}</h2>
+            <h2>The total money is: {{ totalMoney }}</h2>
+        </div>
+        <div style="margin:0 auto;">
+            <table class="pure-table pure-table-bordered" valign="center" align="center">
+            <thead>
+                <th>month</th>
+                <th>day</th>
+                <th>beginTime</th>
+                <th>endTime</th>
+                <th>timeLength</th>
+            </thead>
+            <tbody>
+                {% for line in data %}
+                    <tr>
+                        <td>{{line.month}}</td>
+                        <td>{{line.day}}</td>
+                        <td>{{line.beginTime}}</td>
+                        <td>{{line.endTime}}</td>
+                        <td>{{line.timeLength}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        
+    </body>
+</html>

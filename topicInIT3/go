@@ -1,0 +1,8 @@
+#!/bin/csh -f
+
+set prog  = shentulinghu_ga_topic
+set gprog = $prog.gulliver
+
+python $gprog.py |& tee $prog.output.txt
+
+# diff $prog.py $gprog.py

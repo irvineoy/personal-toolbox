@@ -1,0 +1,56 @@
+Tips :
+    T1.- Use numpy to deal with arrays and avoid "for loops", they are really slow in pure python.
+    T2.- use the make_noise((512,512), params) function below to create the noise (as a numpy array)
+    T3.- cv2.imread() returns np.arrays, so taking the diff should be really easy (no for loops!) :
+        lena = cv2.imread("lena.png")
+        lena_noisy = cv2.imread("lena_noisy.png")
+        noise_target = lena - lena_noisy
+	    # you now only have compare the 'noise_target' with your 'noise_ga' to adapt your fitness() function
+        noise_diff = np.sum(np.abs(noise_target - noise_ga))
+	    # voila!
+
+
+# ----------------------------------------------------------------------
+import numpy as np
+from PIL import Image
+#import cv2
+
+def imread(fn) : # img as array
+	return np.array(Image.open(fn).convert('L'), dtype=np.float)
+#	return cv2.imread(fn, cv2.IMREAD_GRAYSCALE).astype(np.float)
+def imwrite(fn, im_array) :
+	Image.fromarray(np.uint8(im_array)).save(fn)
+#	cv2.imwrite(fn, im_array)
+
+lena = imread("lena.png")
+print lena.shape, lena.dtype
+
+# ----------------------------------------------------------------------
+import numpy as np
+def make_noise(size, params) :
+	NoiseAmp, NoiseFreqRow, NoiseFreqCol = params
+	h, w = size
+	zero_offset = 0
+	zero_offset = 1 # XXXX Matlab starts with 1
+	y = np.arange(h) + zero_offset
+	x = np.arange(w) + zero_offset
+# http://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html
+#	col, row = np.meshgrid(x, y, sparse=True)
+	if 1 : # easier
+		col = x
+		row = y[:, np.newaxis] # Turning a row vector into a column vector
+	noise = NoiseAmp * np.sin(2*np.pi * NoiseFreqRow * row + 2*np.pi * NoiseFreqCol * col)
+	return noise
+
+def corrupt_image(im_in, noise_params) :
+	# read image
+	signal = im_in
+	if type(im_in) == type("") : signal = imread(im_in)
+	# noise
+#	print "NoiseAmp, NoiseFreqRow, NoiseFreqCol", noise_params
+	noise = make_noise(signal.shape, noise_params)
+	# corrupt it
+	signal_noisy = signal + noise
+	# voila!
+	return signal, noise, signal_noisy
+# ----------------------------------------------------------------------

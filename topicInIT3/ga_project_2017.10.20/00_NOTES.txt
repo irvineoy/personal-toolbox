@@ -1,0 +1,4 @@
+
+WARNING: Make sure you follow the rules below :
+	R1.- Index start from 1 (ONE) as in Matlab : N(row, col)
+	R2.- Before saving your float arrays as images, add 0.499, clip them to (0, 255) and then convert them to uint8
