@@ -23,3 +23,7 @@
 - purpose: Record you part-time job shift's time using json file
 - usage: Before using, you need change you hourly wage.(mine is 880)
   Then follow the english hint
+
+## makePlot*
+- purpose: Using matplotlib to make graph
+- usage: The code is just a template, you need change it to suit your need.
